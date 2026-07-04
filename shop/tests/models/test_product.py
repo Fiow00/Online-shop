@@ -1,6 +1,7 @@
 from decimal import Decimal
 
 from django.test import TestCase
+from django.urls import reverse
 
 from shop.models import Product, Category
 
@@ -77,3 +78,6 @@ class ProductModelTest(TestCase):
 
         updated_product = Product.objects.get(pk=self.product.pk)
         self.assertEqual(updated_product.price, Decimal("39.99"))
+
+    def test_get_absolute_url(self):
+        self.assertEqual(self.product.get_absolute_url(), reverse("shop:product_detail", args=[self.product.id, self.product.slug]))
