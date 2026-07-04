@@ -16,3 +16,13 @@ def product_list(request, category_slug=None):
         "categories": categories,
         "products": products,
     })
+
+
+def product_detail(request, product_id, product_slug):
+    product = get_object_or_404(
+        Product, id=product_id, slug=product_slug, available=True
+    )
+
+    return render(request, "shop/product/detail.html", {
+        "product": product,
+    })
