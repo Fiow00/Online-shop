@@ -1,3 +1,4 @@
+from django.urls import reverse
 from django.test import TestCase
 from django.db import IntegrityError
 
@@ -38,3 +39,9 @@ class CategoryModelTest(TestCase):
                 name="Programming",
                 slug="books",
             )
+
+    def test_get_absolute_url(self):
+        self.assertEqual(
+            self.category.get_absolute_url(),
+            reverse("shop:product_list_by_category", args=[self.category.slug])
+        )
